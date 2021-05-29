@@ -1,0 +1,63 @@
+//de standaard functie om een ajax object te maken.
+function createRequestObject(url,variabelen) { 
+	
+	var req; 
+		
+	if(window.XMLHttpRequest)
+	{ 
+		req = new XMLHttpRequest(); 
+	} 
+	else if(window.ActiveXObject) 
+	{ 
+		req = new ActiveXObject("Microsoft.XMLHTTP"); 
+	} 
+	else 
+	{ 
+		alert('Problem creating the XMLHttpRequest object'); 
+	} 
+	
+
+
+	/* 
+	* het aanmaken van het object 
+	*/ 
+	var http = req;
+	
+	sendRequestSearch(url,variabelen);
+	
+	//deze functie wordt aangeroepen met de url waar het script in staat en naartoe wordt verwezen. 
+	//En één array met alle variabelen die worden meegegeven
+	//Per regel uit de array worden iedere keer twee gegevens meegegeven. [0] de naam van de variabele en [1] de waarde van die variabele.
+	function sendRequestSearch(url,variabelen) 
+	{
+		for(a=0;a<variabelen.length;a++)
+		{
+			url+="&"+variabelen[a][0]+"="+variabelen[a][1];
+		}
+		//alert("(createRequestObject) " + url);
+		http.abort();
+		http.open('get', url); 
+		http.onreadystatechange = handleResponseSearch;
+		http.send(null);
+		
+		
+	} 
+	//omdat de uitkomst iedere keer anders kan zijn wordt hier wel de eerste uitsplitsing gedaan of er iets terug komt, 
+	//maar het verwerken van de gegeven gebeurt in een functie die verschillend kan zijn voor verschillende doeleinden.
+	function handleResponseSearch() 
+	{ 
+		if(http.readyState == 4 && http.status == 200){ 
+			if(http.responseText)
+			{
+				var texten = http.responseText;
+				ajaxVerwerking(texten);
+			} 
+		}
+	} 
+
+
+} 
+
+
+	
+	
