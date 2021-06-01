@@ -668,8 +668,15 @@ Work Thumbnails
 	background-size: cover;
 	display: inline-block;
 }
+
+#drupal{
+  margin-top: 5%;
+  width: 8rem;
+}
+
 img#mastermind.center{
 width: 50%;
+float:left;
 }
 .cd-container-clmn-4:hover {
 	opacity: .5;
@@ -901,6 +908,16 @@ div#cd-container-people-clmn-2
 }
 
 @media all and (min-width: 320px) and (max-width: 780px) {
+ /* images*/
+ #mastermind
+{
+  width: 100% !important;
+}
+
+#drupal{
+  width: 50% !important;
+}
+
 	.cd-container-clmn-1 {
 		width: 100%;
 	}
